@@ -1,0 +1,55 @@
+<!--
+  Generated template for the NewEntryPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Novo Lançamento</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="entryForm">
+    <ion-list>
+
+      <ion-item>
+        <input type="tel" 
+        name="amount" 
+        formControlName="amount" 
+        [(ngModel)]="entry.amount"
+        currencyMask [options]="{prefix: 'R$ ', thousands: '.', decimal: ','}"/>
+      </ion-item>
+
+      <ion-item no-lines 
+      class="error" 
+      *ngIf="entryForm.controls.amount.hasError('required') && entryForm.controls.amount.touched">
+        <span>O campo de valor é obrigatório!</span>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Categoria</ion-label>
+        <ion-select name="category_id" 
+        formControlName="category_id" 
+        [(ngModel)]="entry.category_id">
+          <ion-option value="">Selecione uma opção</ion-option>
+          <ion-option value="1">Lazer</ion-option>
+          <ion-option value="2">Alimentação</ion-option>
+          <ion-option value="3">Casa</ion-option>
+          <ion-option value="4">Carro</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-lines class="error"
+        *ngIf="entryForm.controls.category_id.hasError('required') && entryForm.controls.category_id.touched">
+        <span>O campo de categoria deve ser selecionado!</span>
+      </ion-item>
+
+      <ion-item>
+        <button ion-button [disabled]="!entryForm.valid" (click)="submitForm()">Adicionar</button>
+        <button ion-button (click)="goBack()">Cancelar</button>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
